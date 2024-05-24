@@ -5,32 +5,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbarButtons = document.querySelectorAll('.button');
     const rewindButton = document.querySelector('.reset');
 
-
     let scrollInterval = null;
-    // Sayfanın başına dönme işlevi
-    rewindButton.addEventListener('click', function () {
-        window.scrollTo(0, 0); // Sayfanın en üstüne git
-    });
+    let scrollStep, scrollHeight, scrollCount;
+
+    function smoothScroll() {
+        if (scrollCount >= scrollHeight) {
+            window.scrollTo(0, document.documentElement.scrollHeight);
+        } else {
+            window.scrollBy(0, scrollStep);
+            scrollCount += scrollStep;
+            requestAnimationFrame(smoothScroll);
+        }
+    }
 
     scrollDownBtn.addEventListener('click', function () {
-        clearInterval(scrollInterval); // Daha önceki kaydırma işlemini durdur
-        const speed = parseInt(speedControl.value, 10) * 100; // Hızı artırın
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollStep = scrollHeight / 100; // Yüzdeye göre kaydırma adımı
-        let scrollCount = 0;
-
-        scrollInterval = setInterval(function () {
-            if (scrollCount >= scrollHeight) {
-                clearInterval(scrollInterval);
-                window.scrollTo(0, document.documentElement.scrollHeight); // Sayfanın en altına git
-            } else {
-                window.scrollBy(0, scrollStep);
-                scrollCount += scrollStep;
-            }
-        }, speed);
+        cancelAnimationFrame(scrollInterval); 
+        const speed = parseInt(speedControl.value, 10) * 100;
+        scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollStep = scrollHeight / 100; 
+        scrollCount = 0;
+        scrollInterval = requestAnimationFrame(smoothScroll);
     });
 
-    // Sarı alanın gösterilip gizlenmesi
+    speedControl.addEventListener('input', function () {
+        if (scrollInterval) {
+            cancelAnimationFrame(scrollInterval);
+            scrollInterval = requestAnimationFrame(smoothScroll);
+        }
+    });
+
+    rewindButton.addEventListener('click', function () {
+        window.scrollTo(0, 0);
+    });
+
     window.addEventListener('scroll', function () {
         if (isElementInViewport(readingArea)) {
             readingArea.classList.add('hide');
@@ -39,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Navbar'daki butonların durumunun sıfırlanması
     navbarButtons.forEach(function (button) {
         button.addEventListener('click', function () {
             if (button.classList.contains('active')) {
@@ -48,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Elementin görünürlük durumunu kontrol eden fonksiyon
     function isElementInViewport(el) {
         const rect = el.getBoundingClientRect();
         return (
@@ -59,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     }
 
-    // Timer functionality
     let timerInterval;
     function startTimer() {
         let startTime = new Date().getTime();
@@ -81,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(timerInterval);
     }
 
-    // Play/Pause functionality
     let isPlaying = false;
     $('.icon-play').click(function () {
         if (isPlaying) {
@@ -94,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         isPlaying = !isPlaying;
     });
 
-    // Slider functionality
     $('.font_size.slider').slider({
         min: 20,
         max: 100,
@@ -124,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Color picker functionality
     $('#text-color-picker').change(function () {
         $('.teleprompter').css('color', $(this).val());
     });
@@ -133,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.teleprompter').css('background-color', $(this).val());
     });
 
-    // Other button functionalities
     $('.text-align').click(function () {
         $('.teleprompter').css('text-align', 'center');
     });
