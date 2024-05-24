@@ -1,0 +1,184 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Dialog - Diksiyon, Oyunculuk, Spikerlik Kursu</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
+
+
+    <meta name="author" content="Teleprompter Mirror">
+    <meta name="description"
+        content="Free online teleprompter software with voice activated scrolling. Runs in browser or download it for PC, Mac, iOS, or Android.">
+
+    <!-- Mobile Specific Meta Tags -->
+    <!-- <meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css?v=0.6.1">
+    <link href="/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="/css/responsive.css" rel="stylesheet"> <!--load the responsive overrides -->
+
+    <script src="https://kit.fontawesome.com/650710d258.js" crossorigin="anonymous"></script>
+    <style media="all" id="fa-kit-upload"></style>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="shortcut icon" href="teleprompter-favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="gui" cz-shortcut-listen="true">
+    <header>
+        <h1>
+            <a href="voice-activated-teleprompter/"><i title="Switch To Voice Activated Teleprompter"
+                    class="fas fa-microphone active" aria-hidden="true"></i><span class="sr-only">Switch To Voice
+                    Activated Teleprompter</span></a><!--<i class="fal fa-clock play"></i>--> <span
+                style="color:lightgreen" class="clock">00:00:00</span>
+        </h1>
+        <nav>
+            <div class="buttons">
+                <a class="button small fal fa-book" title="Instructions" href="https://youtu.be/MQf3zjzgisw"
+                    onclick="return true;" aria-hidden="true"></a><span class="sr-only">Instructions</span>
+                <a class="button small fal fa-align-center text-align" title="Center Text" href="#"
+                    onclick="return false;" aria-hidden="true"></a><span class="sr-only">Center Text</span>
+                <a class="button small fad fa-undo reset" title="Rewind To Start" href="#" onclick="return false;"
+                    aria-hidden="true"></a><span class="sr-only">Rewind To Start</span>
+                <a class="button small fal fa-text-width flipx" title="Mirror Flip" href="#" onclick="return false;"
+                    aria-hidden="true"></a><span class="sr-only">Mirror Flip</span>
+                <a class="button small fal fa-text-height flipy" title="Vertical Flip" href="#" onclick="return false;"
+                    aria-hidden="true"></a><span class="sr-only">Vertical Flip</span>
+                <a style="color:lightgreen" class="button icon-play play active" href="#" title="Play/Pause"
+                    onclick="return false;"></a>
+                <a class="button mobile-only mobile-menu-toggle fad fa-chevron-down" title="toggle menu" href="#"
+                    onclick="$('header').toggleClass('expanded'); return false;" aria-hidden="true"></a><span
+                    class="sr-only">toggle menu</span>
+                <a class="button fal fa-folder-open open active" title="Open File" href="#"
+                    onclick="document.querySelector('.load-file').click(); return false;" aria-hidden="true"></a><span
+                    class="sr-only">Open File</span>
+                <a class="button fal fa-save save active" href="#" title="Save Script" onclick="return false;"
+                    aria-hidden="true"></a><span class="sr-only">Save Script</span>
+                <span style="display: none;"><input type="file" class="load-file" accept=".txt"
+                        onchange="openFile(event)"></span>
+            </div>
+        </nav>
+    </header>
+    <article>
+        <div class="scroll-down-btn-container">
+            <button id="scroll-down-btn" class="scroll-down-btn">Aşağı Kaydır</button>
+        </div>
+        <div class="speed-control">
+            <label for="speed-control">Kaydırma Hızı:</label>
+            <input type="range" min="1" max="10" value="5" class="slider" id="speed-control">
+        </div>
+        <div class="reading-area"></div>
+        <div spellcheck="false" class="teleprompter" id="teleprompter" contenteditable="true">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vivamus lacinia odio vitae vestibulum
+                vestibulum. Cras venenatis euismod malesuada. Nulla facilisi. Proin ac malesuada tortor. Fusce volutpat
+                arcu a massa convallis, nec vehicula massa elementum. Morbi sed fermentum velit. Ut scelerisque dui vel
+                velit venenatis, a volutpat elit condimentum. Nulla eu odio nisi. Donec vitae sem eu orci varius
+                aliquet. Suspendisse potenti. Aenean et ante lorem. Nam vehicula, augue at vehicula pharetra, odio eros
+                vulputate tortor, sit amet facilisis nulla eros ac arcu. Praesent bibendum justo sit amet est
+                scelerisque, non volutpat felis vehicula. Maecenas volutpat ligula ut orci consectetur, sit amet
+                ultricies ligula condimentum. Proin at varius felis. Pellentesque et ex ipsum. Sed tempus erat vitae
+                tortor fermentum, eget efficitur felis gravida.
+            </p>
+        </div>
+    </article>
+    <footer>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="js/jquery.timer.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jscolor.js"></script>
+    <script src="js/script.js?v=0.6.2"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollDownBtn = document.getElementById('scroll-down-btn');
+            const speedControl = document.getElementById('speed-control');
+
+            scrollDownBtn.addEventListener('click', function () {
+                const speed = parseInt(speedControl.value, 10);
+                window.scrollBy({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Dosya açma işlevi
+            const loadFileInput = document.querySelector('.load-file');
+            loadFileInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const content = e.target.result;
+                        document.getElementById('teleprompter').innerText = content;
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            // Kaydırma hızını kontrol etme
+            const speedControlRange = document.getElementById('speed-control');
+            speedControlRange.addEventListener('input', function () {
+                scrollSpeed = speedControlRange.value;
+            });
+        });
+    </script>
+    <a id="mycustomimage" href="#" download=""></a>
+</body>
+
+</html>
